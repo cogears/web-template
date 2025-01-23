@@ -1,0 +1,28 @@
+{
+    "name": "web-template",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "npm run build:client && npm run build:server && node render static",
+        "build:client": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/client",
+        "build:server": "vite build --ssr src/app-server.ts --outDir dist/server",
+        "serve": "NODE_ENV=production node render server",
+        "preview": "vite preview --outDir dist/client"
+    },
+    "dependencies": {
+        "vue": "^3.5.13",
+        "vue-router": "^4.5.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.7",
+        "@vitejs/plugin-vue": "^5.2.1",
+        "@vue/tsconfig": "^0.7.0",
+        "compression": "^1.7.5",
+        "express": "^4.21.2",
+        "typescript": "~5.6.2",
+        "vite": "^6.0.5",
+        "vue-tsc": "^2.2.0"
+    }
+}
