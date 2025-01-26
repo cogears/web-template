@@ -7,7 +7,9 @@ const resolve = (p) => path.resolve(__dirname, p)
 const template = fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
 const manifest = JSON.parse(fs.readFileSync(resolve('dist/client/.vite/ssr-manifest.json'), 'utf-8'))
 const { render } = await import('./dist/server/app-server.js')
-const staticPages = fs.readdirSync(resolve('src/app/static')).map(file => '/' + file.toLowerCase() + '.html')
+const staticPages = fs.readdirSync(resolve('src/app/static'))
+    .filter(file => file.endsWith('.vue'))
+    .map(file => '/' + file.replace('.vue', '.html').toLowerCase())
 async function renderPage(url) {
     const [appHtml, preloadLinks] = await render(url, manifest)
     return template
